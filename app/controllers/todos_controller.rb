@@ -25,6 +25,14 @@ class TodosController < ApplicationController
   end
 
   def update
+    @todo = Todo.find(params[:id])
+    respond_to do |format|
+      if @todo.update_attributes(todo_params)
+        format.json { head :no_content}
+      else
+        format.json { head 500 }
+      end
+    end
   end
 
   def destroy
@@ -35,7 +43,8 @@ class TodosController < ApplicationController
   def todo_params
     params.require(:todo).permit(
       :title,
-      :due
+      :due,
+      :status
     )
   end
 
