@@ -1,6 +1,9 @@
 class Todo < ActiveRecord::Base
   include AASM
 
+  scope :pending,  -> { where(state: :started) }
+  scope :finished, -> { where.not(state: :started) }
+
   aasm column: 'state' do
     state :started, initial: true
     state :closed

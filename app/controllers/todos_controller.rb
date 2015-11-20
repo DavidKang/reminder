@@ -3,8 +3,14 @@ class TodosController < ApplicationController
 
   def index
     respond_to do |format|
-      @todos = Todo.all
-      format.html
+      @todos = Todo.pending
+      format.json
+    end
+  end
+
+  def done_todos
+    respond_to do |format|
+      @todos = Todo.finished
       format.json
     end
   end
