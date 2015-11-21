@@ -5,6 +5,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       @todos = Todo.pending
       format.json
+      format.txt
     end
   end
 
