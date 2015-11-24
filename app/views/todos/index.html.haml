@@ -1,0 +1,24 @@
+%h1 TODOS LIST
+- count = 0
+%table
+  %tr
+    %th id
+    %th due
+    %th project
+    %th title
+  - @todos.each do |todo|
+    - if @date[count] == todo.due and !@date[count].nil?
+      %tr
+        %td= todo.when?
+      - count += 1
+      %tr
+        %td= todo.id
+        %td= todo.due
+        %td= todo.project
+        %td= todo.title
+    - else
+      %tr
+        %td= todo.id
+        %td= todo.due
+        %td= todo.project
+        %td= todo.title

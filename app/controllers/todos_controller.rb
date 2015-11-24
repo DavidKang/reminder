@@ -4,8 +4,10 @@ class TodosController < ApplicationController
   def index
     respond_to do |format|
       @todos = Todo.pending.order(:due)
+      @date_list = @todos.map { |todo| [todo.due] }.flatten.uniq.compact
       format.json
       format.txt
+      format.html
     end
   end
 
@@ -39,7 +41,7 @@ class TodosController < ApplicationController
       todo = YAML.load("{#{line}}")
       t = Todo.find(todo.delete("id"))
       @todos << t
-      t.update_attributes(todo_params)
+      t.update_attributes(todo)
     end
     head :no_content
   end
