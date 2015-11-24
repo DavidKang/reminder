@@ -39,7 +39,7 @@ class TodosController < ApplicationController
       todo = YAML.load("{#{line}}")
       t = Todo.find(todo.delete("id"))
       @todos << t
-      t.update_attributes(todo)
+      t.update_attributes(todo_params)
     end
     head :no_content
   end
