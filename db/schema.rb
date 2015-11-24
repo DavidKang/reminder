@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106221752) do
+ActiveRecord::Schema.define(version: 20151124083609) do
 
   create_table "todos", force: :cascade do |t|
     t.text     "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20151106221752) do
     t.string   "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "project"
   end
 
 end

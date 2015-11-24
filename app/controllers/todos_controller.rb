@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 
   def index
     respond_to do |format|
-      @todos = Todo.pending
+      @todos = Todo.pending.order(:due)
       format.json
       format.txt
     end
@@ -31,6 +31,17 @@ class TodosController < ApplicationController
         }
       end
     end
+  end
+
+  def import
+    @todos = []
+    params[:file].read.split("\n").each do |line|
+      todo = YAML.load("{#{line}}")
+      t = Todo.find(todo.delete("id"))
+      @todos << t
+      t.update_attributes(todo)
+    end
+    head :no_content
   end
 
   def update
@@ -71,7 +82,8 @@ class TodosController < ApplicationController
     params.require(:todo).permit(
       :title,
       :due,
-      :status
+      :status,
+      :project
     )
   end
 
