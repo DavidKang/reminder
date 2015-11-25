@@ -25,7 +25,11 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
-    @todo.due = Date.send(@todo.due) if @valid_string.include? @todo.due
+    if @todo.due.nil?
+      @todo.due = Date.today
+    else
+      @todo.due = Date.send(@todo.due) if @valid_string.include? @todo.due
+    end
     respond_to do |format|
       if @todo.save
         format.json { head :no_content }
@@ -41,7 +45,11 @@ class TodosController < ApplicationController
     @todos = []
     params[:file].read.split("\n").each do |line|
       todo = YAML.load("{#{line}}")
-      todo['due'] = Date.send(todo['due']) if @valid_string.include? todo['due']
+      if todo['due'].nil?
+        todo['due'] = Date.today
+      else
+        todo['due'] = Date.send(todo['due']) if @valid_string.include? todo['due']
+      end
       t = Todo.find(todo.delete("id"))
       @todos << t
       t.update_attributes(todo)

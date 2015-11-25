@@ -1,24 +1,16 @@
 %h1 TODOS LIST
 - count = 0
-%table
+%table{ cellpadding: 0, cellspacing: 0 }
   %tr
     %th id
-    %th due
     %th project
     %th title
   - @todos.each do |todo|
     - if @date[count] == todo.due and !@date[count].nil?
-      %tr
-        %td= todo.when?
+      %tr.date
+        %td{ colspan: 3 }= todo.due
       - count += 1
-      %tr
-        %td= todo.id
-        %td= todo.due
-        %td= todo.project
-        %td= todo.title
-    - else
-      %tr
-        %td= todo.id
-        %td= todo.due
-        %td= todo.project
-        %td= todo.title
+    %tr{ class: "#{todo.when?}"}
+      %td= todo.id
+      %td= todo.project
+      %td= todo.title
