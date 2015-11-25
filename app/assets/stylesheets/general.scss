@@ -29,7 +29,7 @@ table{
 .tomorrow {
   background-color: $orange;
 }
-.next-week {
+.this-week {
   background-color: $orange;
 }
 .in-the-future {
@@ -38,4 +38,5 @@ table{
 .date {
   background-color: $green;
   font-size: 18px;
+  border: 1px solid #000000;
 }
