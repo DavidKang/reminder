@@ -1,10 +1,11 @@
 class TodosController < ApplicationController
   before_filter :set_todo, only: %i[done reopen]
+  before_filter :set_valid_string, only: %i[create import]
 
   def index
     respond_to do |format|
       @todos = Todo.pending.order(:due)
-      @date_list = @todos.map { |todo| [todo.due] }.flatten.uniq.compact
+      @date = @todos.map { |todo| [todo.due] }.flatten.uniq.compact
       format.json
       format.txt
       format.html
@@ -24,6 +25,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
+    @todo.due = Date.send(@todo.due) if @valid_string.include? @todo.due
     respond_to do |format|
       if @todo.save
         format.json { head :no_content }
@@ -39,6 +41,7 @@ class TodosController < ApplicationController
     @todos = []
     params[:file].read.split("\n").each do |line|
       todo = YAML.load("{#{line}}")
+      todo['due'] = Date.send(todo['due']) if @valid_string.include? todo['due']
       t = Todo.find(todo.delete("id"))
       @todos << t
       t.update_attributes(todo)
@@ -78,6 +81,10 @@ class TodosController < ApplicationController
 
   def set_todo
     @todo = Todo.find(params[:id])
+  end
+
+  def set_valid_string
+    @valid_string = %w[today tomorrow]
   end
 
   def todo_params
