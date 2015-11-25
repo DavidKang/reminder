@@ -20,13 +20,17 @@ class Todo < ActiveRecord::Base
   def when?
     today = Date.today
     prev_week = Date.today.prev_week
-    return "YESTERDAY" if due == Date.yesterday
-    return "TODAY" if due == Date.today
-    return "TOMORROW" if due == Date.tomorrow
-    return "LAST WEEK" if due > prev_week.beginning_of_week && due < prev_week.end_of_week
-    return "THIS WEEK" if due > today.beginning_of_week && due <  today.end_of_week
-    return "IN THE GRAVE" if due < today
-    return "IN THE FUTURE" if due > today
+    if due.nil?
+      return "no-date"
+    else
+      return "yesterday" if due == Date.yesterday
+      return "today" if due == Date.today
+      return "tomorrow" if due == Date.tomorrow
+      return "last-week" if due >= prev_week.beginning_of_week && due <= prev_week.end_of_week
+      return "this-week" if due >= today.beginning_of_week && due <=  today.end_of_week
+      return "in-the-grave" if due < today
+      return "in-the-future" if due > today
+    end
   end
 
 end

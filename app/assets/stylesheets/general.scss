@@ -1,0 +1,35 @@
+body{
+ background-color: #000000;
+ color: $white;
+}
+
+table{
+  color: #000000;
+  width: 100%;
+  border:0;
+  tr{
+    td {
+      padding: 2px 10px;
+      text-align: center;
+    }
+  }
+}
+.in-the-grave {
+  background-color: $red;
+}
+.yesterday {
+  background-color: $usabi;
+}
+.today {
+  background-color: $blue;
+}
+.tomorrow {
+  background-color: $orange;
+}
+.in-the-future {
+  background-color: $white;
+}
+.date {
+  background-color: $green;
+  font-size: 18px;
+}
