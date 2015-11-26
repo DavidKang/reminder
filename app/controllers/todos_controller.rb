@@ -29,7 +29,7 @@ class TodosController < ApplicationController
     if @todo.due.nil?
       @todo.due = Date.today
     else
-      @todo.due = Date.send(@todo.due) if @valid_string.include? @todo.due
+      @todo.due = Date.send(params[:todo][:due]) if @valid_string.include? params[:todo][:due]
     end
     respond_to do |format|
       if @todo.save
