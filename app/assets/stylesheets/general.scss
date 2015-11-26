@@ -1,6 +1,7 @@
 body{
  background-color: #000000;
  color: $white;
+ overflow-y: hidden;
 }
 
 table{
@@ -55,11 +56,6 @@ table{
     border-top: 1px solid #000000;
   }
 
-}
-
-.grummy-cat {
-  width: 170px;
-  float: right;
 }
 
 .refresh {
