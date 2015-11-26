@@ -18,6 +18,8 @@
 
 $(document).ready(function() {
   setInterval(function(){
-    $(".refresh").click();
+    $.ajax({
+      url: "/todos.js",
+    });
   },2000)
 })

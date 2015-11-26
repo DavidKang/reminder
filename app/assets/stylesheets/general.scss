@@ -58,12 +58,18 @@ table{
 
 }
 
-.grummy-cat {
+.grummy-cat, .sushi-cat {
   position: absolute;
-  top: 0px;
   right: 0px;
   z-index: -1;
   width: 145px;
+}
+
+.grummy-cat {
+  top: 0;
+}
+.sushi-cat {
+  bottom: 0;
 }
 
 .refresh {
