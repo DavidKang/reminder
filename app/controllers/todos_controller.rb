@@ -33,6 +33,7 @@ class TodosController < ApplicationController
     end
     respond_to do |format|
       if @todo.save
+        SlackNotifierWorker.perform_at(@todo.due + @todo.at.hours, @todo.id )
         format.json { head :no_content }
       else
         format.json {
