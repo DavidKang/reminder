@@ -58,18 +58,24 @@ table{
 
 }
 
-.grummy-cat, .sushi-cat {
+.pikachu, .sushi-cat, .pikachu-sleep {
   position: absolute;
-  right: 0px;
   z-index: -1;
-  width: 145px;
+  width: 140px;
 }
 
-.grummy-cat {
+.pikachu {
   top: 0;
+  right: 0px;
+}
+.pikachu-sleep {
+  bottom: 0;
+  width: 90px;
+  right: 0px;
 }
 .sushi-cat {
   bottom: 0;
+  left: 0px;
 }
 
 .refresh {
