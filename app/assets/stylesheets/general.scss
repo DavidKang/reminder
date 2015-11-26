@@ -4,6 +4,14 @@ body{
  overflow-y: hidden;
 }
 
+.title {
+  background: grey none repeat scroll 0% 0%;
+  border-radius: 10px;
+  padding: 11px 10px 5px;
+  float: left;
+  margin: 9px 0;
+}
+
 table{
   color: #000000;
   width: 100%;
@@ -22,6 +30,9 @@ table{
     font-size: 19px;
     text-align: left;
     line-height: 30px;
+    th {
+      padding: 0 10px;
+    }
   }
 }
 .in-the-grave {
@@ -74,8 +85,12 @@ table{
   right: 0px;
 }
 .sushi-cat {
-  bottom: 0;
-  left: 0px;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -150px;
+  opacity: 0.3;
 }
 
 .refresh {

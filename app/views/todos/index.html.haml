@@ -1,4 +1,4 @@
-%h1= "TODO LIST - USABI WILL CHANGE THE WORLD!!! - #{Date.today}"
+%h1.title= "TODO LIST - USABI WILL CHANGE THE WORLD!!! - #{Date.today}"
 .list
   = render partial: "list", locals: { todos: @todos, date: @date }
 
