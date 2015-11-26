@@ -26,7 +26,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
-    if @todo.due.nil?
+    if !params["todo"]["due"].present?
       @todo.due = Date.today
     else
       @todo.due = Date.send(params["todo"]["due"]) if @valid_string.include? params["todo"]["due"]
