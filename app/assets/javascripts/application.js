@@ -18,6 +18,6 @@
 
 $(document).ready(function() {
   setInterval(function(){
-     window.location.reload();
-  },2000)
+    $(".btn").click();
+},2000)
 })

@@ -9,6 +9,7 @@ class TodosController < ApplicationController
       format.json
       format.txt
       format.html
+      format.js
     end
   end
 
