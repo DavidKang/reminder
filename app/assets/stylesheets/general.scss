@@ -58,6 +58,14 @@ table{
 
 }
 
+.grummy-cat {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: -1;
+  width: 145px;
+}
+
 .refresh {
   display: none;
 }
