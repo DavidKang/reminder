@@ -1,7 +1,9 @@
-%h1.title= "TODO LIST - USABI WILL CHANGE THE WORLD!!! - #{Date.today}"
+%h1.title
+  = image_tag('logo.png', class: 'logo')
+  = 'TODO LIST - USABI WILL CHANGE THE WORLD!!! -'
+  %span#date= Date.today
 .list
   = render partial: "list", locals: { todos: @todos, date: @date }
 
-= image_tag("pikachu.png", class: "pikachu")
 = image_tag("pikachu_sleep.png", class: "pikachu-sleep")
 = image_tag("sushi_cat.png", class: "sushi-cat")

@@ -1,1 +1,2 @@
 $(".list").html("<%=escape_javascript(render partial: 'list', locals: { todos: @todos, date: @date } )%>");
+$("#date").html("<%= Date.today %>");
