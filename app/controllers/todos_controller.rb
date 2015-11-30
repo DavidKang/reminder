@@ -31,11 +31,12 @@ class TodosController < ApplicationController
     if !params["todo"]["due"].present?
       @todo.due = Date.today
     else
-      if day = @week_days[params["todo"]["due"]]
+      day = @week_days[params["todo"]["due"].to_sym]
+      if day
         if [:today, :tomorrow].include? day
-          @todo.due = Date.send(day).strftime("%Y-%m-%d")
+          @todo.due = Date.send(day)
         else
-          @todo.due = Date.next_week.send(day).strftime("%Y-%m-%d")
+          @todo.due = Date.today.next_week.send(day)
         end
       end
     end
