@@ -115,7 +115,7 @@ class TodosController < ApplicationController
       'tomorrow': :tomorrow,
       'lun': :monday,
       'mar': :tuesday,
-      'mier': :wednesday,
+      'mie': :wednesday,
       'jue': :thursday,
       'vie': :fryday,
       'sab': :saturday,
