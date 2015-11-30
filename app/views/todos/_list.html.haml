@@ -10,6 +10,6 @@
         %td{ colspan: 3 }= todo.due
       - count += 1
     %tr{ class: "#{todo.when?}"}
-      %td= todo.id
+      %td.id= "##{todo.id}"
       %td= todo.project
       %td= todo.title

@@ -21,6 +21,10 @@ table{
       text-align: left;
       font-size: 18px;
       border-right: 1px solid $grey;
+      &.id {
+        text-align: right;
+        max-width: 20px;
+      }
     }
   }
   & tr.header{
