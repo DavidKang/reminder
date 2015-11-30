@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_filter :set_todo, only: %i[done reopen]
-  before_filter :set_valid_string, only: %i[create import]
+  before_filter :set_week_days, only: %i[create import]
 
   def index
     respond_to do |format|
@@ -31,7 +31,13 @@ class TodosController < ApplicationController
     if !params["todo"]["due"].present?
       @todo.due = Date.today
     else
-      @todo.due = Date.send(params["todo"]["due"]) if @valid_string.include? params["todo"]["due"]
+      if day = @week_days[params["todo"]["due"]]
+        if [:today, :tomorrow].include? day
+          @todo.due = Date.send(day).strftime("%Y-%m-%d")
+        else
+          @todo.due = Date.next_week.send(day).strftime("%Y-%m-%d")
+        end
+      end
     end
     respond_to do |format|
       if @todo.save
@@ -53,6 +59,13 @@ class TodosController < ApplicationController
         todo['due'] = Date.today
       else
         todo['due'] = Date.send(todo['due']) if @valid_string.include? todo['due']
+        if day = @week_days[todo['due']]
+          if [:today, :tomorrow].include? day
+            todo['due'] = Date.send(day)
+          else
+            todo['due'] = Date.next_week.send(day)
+          end
+        end
       end
       t = Todo.find(todo.delete("id"))
       @todos << t
@@ -95,8 +108,18 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
   end
 
-  def set_valid_string
-    @valid_string = %w[today tomorrow]
+  def set_week_days
+    @week_days = {
+      'today': :today,
+      'tomorrow': :tomorrow,
+      'lun': :monday,
+      'mar': :tuesday,
+      'mier': :wednesday,
+      'jue': :thursday,
+      'vie': :fryday,
+      'sab': :saturday,
+      'dom': :sunday
+    }
   end
 
   def todo_params
