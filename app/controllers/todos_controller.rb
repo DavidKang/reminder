@@ -5,7 +5,9 @@ class TodosController < ApplicationController
   def index
     respond_to do |format|
       @todos = Todo.pending.order(:due, :project)
-      @date = @todos.map { |todo| [todo.due] }.flatten.uniq.compact
+      @date = @todos.map { |todo| [todo.due] }
+      @date << Date.today
+      @date = @date.flatten.compact.uniq.sort
       format.json
       format.txt
       format.html

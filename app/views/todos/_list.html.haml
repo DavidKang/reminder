@@ -8,8 +8,23 @@
     - if date[count] == todo.due and !date[count].nil?
       %tr.date
         %td{ colspan: 3 }= todo.due
+      - if date[count] == Date.today and todo.due != Date.today
+        %tr.today
+          %td{colspan: 3}= 'NO HAY TAREAS PARA HOY'
+      - else
+        %tr{ class: "#{todo.when?}"}
+          %td= todo.id
+          %td= todo.project
+          %td= todo.title
       - count += 1
-    %tr{ class: "#{todo.when?}"}
-      %td.id= "##{todo.id}"
-      %td= todo.project
-      %td= todo.title
+    - else
+      %tr{ class: "#{todo.when?}"}
+        %td= todo.id
+        %td= todo.project
+        %td= todo.title
+  - if count < date.count || date.count == 0
+    %tr.date
+      %td{ colspan: 3 }= Date.today
+    %tr.today
+      %td{colspan: 3}= 'NO HAY TAREAS PARA HOY'
+
