@@ -31,12 +31,14 @@ class TodosController < ApplicationController
     if !params["todo"]["due"].present?
       @todo.due = Date.today
     else
-      day = @week_days[params["todo"]["due"].to_sym]
-      if day
-        if [:today, :tomorrow].include? day
-          @todo.due = Date.send(day)
-        else
-          @todo.due = Date.today.next_week.send(day)
+      if params['todo']['due'].class == String
+        day = @week_days[params["todo"]["due"].to_sym]
+        if day
+          if [:today, :tomorrow].include? day
+            @todo.due = Date.send(day)
+          else
+            @todo.due = Date.today.next_week.send(day)
+          end
         end
       end
     end
@@ -59,12 +61,14 @@ class TodosController < ApplicationController
       if todo['due'].nil?
         todo['due'] = Date.today
       else
-        todo['due'] = Date.send(todo['due']) if @valid_string.include? todo['due']
-        if day = @week_days[todo['due']]
-          if [:today, :tomorrow].include? day
-            todo['due'] = Date.send(day)
-          else
-            todo['due'] = Date.next_week.send(day)
+        if todo['due'].class == String
+          day = @week_days[todo['due'].to_sym]
+          if day
+            if [:today, :tomorrow].include? day
+              todo['due'] = Date.send(day)
+            else
+              todo['due'] = Date.next_week.send(day)
+            end
           end
         end
       end
