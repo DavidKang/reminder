@@ -26,8 +26,6 @@ class Todo < ActiveRecord::Base
       return "yesterday" if due == Date.yesterday
       return "today" if due == Date.today
       return "tomorrow" if due == Date.tomorrow
-      return "last-week" if due >= prev_week.beginning_of_week && due <= prev_week.end_of_week
-      return "this-week" if due >= today.beginning_of_week && due <=  today.end_of_week
       return "in-the-grave" if due < today
       return "in-the-future" if due > today
     end

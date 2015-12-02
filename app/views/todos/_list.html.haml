@@ -5,23 +5,21 @@
     %th project
     %th title
   - todos.each do |todo|
-    - if date[count] == todo.due and !date[count].nil?
+    - if (date[count] == todo.due and !date[count].nil?) || (date[count] == Date.today and date[count-1] != todo.due and !date[count].nil?)
       %tr.date
-        %td{ colspan: 3 }= todo.due
+        %td{ colspan: 3 }= date[count]
       - if date[count] == Date.today and todo.due != Date.today
         %tr.today
           %td{colspan: 3}= 'NO HAY TAREAS PARA HOY'
+        %tr.date
+          %td{ colspan: 3 }= todo.due
+          = render partial: 'row', locals: { todo: todo }
+        - count += 1
       - else
-        %tr{ class: "#{todo.when?}"}
-          %td= todo.id
-          %td= todo.project
-          %td= todo.title
+        = render partial: 'row', locals: { todo: todo }
       - count += 1
     - else
-      %tr{ class: "#{todo.when?}"}
-        %td= todo.id
-        %td= todo.project
-        %td= todo.title
+      = render partial: 'row', locals: { todo: todo }
   - if count < date.count || date.count == 0
     %tr.date
       %td{ colspan: 3 }= Date.today
